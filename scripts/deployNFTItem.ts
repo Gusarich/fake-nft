@@ -1,13 +1,18 @@
-import { toNano } from 'ton-core';
+import { Address, toNano } from 'ton-core';
 import { NFTItem } from '../wrappers/NFTItem';
 import { compile, NetworkProvider } from '@ton-community/blueprint';
 
 export async function run(provider: NetworkProvider) {
-    const NFTItem = provider.open(NFTItem.createFromConfig({}, await compile('NFTItem')));
+    const nft = provider.open(
+        NFTItem.createFromConfig(
+            {
+                owner: Address.parse('EQBKgXCNLPexWhs2L79kiARR1phGH1LwXxRbNsCFF9doc2lN'),
+            },
+            await compile('NFTItem')
+        )
+    );
 
-    await NFTItem.sendDeploy(provider.sender(), toNano('0.05'));
+    await nft.sendDeploy(provider.sender(), toNano('0.01'));
 
-    await provider.waitForDeploy(NFTItem.address);
-
-    // run methods on `NFTItem`
+    await provider.waitForDeploy(nft.address);
 }

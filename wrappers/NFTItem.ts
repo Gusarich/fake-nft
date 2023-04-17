@@ -2,11 +2,10 @@ import { Address, beginCell, Cell, Contract, contractAddress, ContractProvider, 
 
 export type NFTItemConfig = {
     owner: Address;
-    content: Cell;
 };
 
 export function NFTItemConfigToCell(config: NFTItemConfig): Cell {
-    return beginCell().storeAddress(config.owner).storeRef(config.content).endCell();
+    return beginCell().storeAddress(config.owner).endCell();
 }
 
 export class NFTItem implements Contract {
