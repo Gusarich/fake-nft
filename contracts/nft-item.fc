@@ -5,5 +5,5 @@
 }
 
 (int, int, slice, slice, cell) get_nft_data() method_id {
-    return (-1, 0, "0"s, get_data().begin_parse(), begin_cell().store_uint(1, 8).end_cell());
+    return (-1, 0, "0"s, get_data().begin_parse().skip_last_bits(16), begin_cell().store_uint(1, 8).end_cell());
 }

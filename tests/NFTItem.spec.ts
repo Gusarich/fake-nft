@@ -21,6 +21,7 @@ describe('NFTItem', () => {
             NFTItem.createFromConfig(
                 {
                     owner: randomAddress(),
+                    index: 0n,
                 },
                 code
             )

@@ -6,13 +6,14 @@ export async function run(provider: NetworkProvider) {
     const nft = provider.open(
         NFTItem.createFromConfig(
             {
-                owner: Address.parse('EQBKgXCNLPexWhs2L79kiARR1phGH1LwXxRbNsCFF9doc2lN'),
+                owner: Address.parse('EQCRtBJh6Xw1OSr0OqHZ10ARHVcTaf1MIKxDaL1Y0HXagcEj'),
+                index: 0n,
             },
             await compile('NFTItem')
         )
     );
 
-    await nft.sendDeploy(provider.sender(), toNano('0.01'));
+    await nft.sendDeploy(provider.sender(), toNano('0.0007'));
 
     await provider.waitForDeploy(nft.address);
 }
