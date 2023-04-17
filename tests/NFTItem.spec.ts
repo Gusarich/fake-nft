@@ -12,20 +12,20 @@ describe('NFTItem', () => {
     });
 
     let blockchain: Blockchain;
-    let nFTItem: SandboxContract<NFTItem>;
+    let NFTItem: SandboxContract<NFTItem>;
 
     beforeEach(async () => {
         blockchain = await Blockchain.create();
 
-        nFTItem = blockchain.openContract(NFTItem.createFromConfig({}, code));
+        NFTItem = blockchain.openContract(NFTItem.createFromConfig({}, code));
 
         const deployer = await blockchain.treasury('deployer');
 
-        const deployResult = await nFTItem.sendDeploy(deployer.getSender(), toNano('0.05'));
+        const deployResult = await NFTItem.sendDeploy(deployer.getSender(), toNano('0.05'));
 
         expect(deployResult.transactions).toHaveTransaction({
             from: deployer.address,
-            to: nFTItem.address,
+            to: NFTItem.address,
             deploy: true,
             success: true,
         });
@@ -33,6 +33,6 @@ describe('NFTItem', () => {
 
     it('should deploy', async () => {
         // the check is done inside beforeEach
-        // blockchain and nFTItem are ready to use
+        // blockchain and NFTItem are ready to use
     });
 });

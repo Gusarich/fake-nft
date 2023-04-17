@@ -1,9 +1,12 @@
 import { Address, beginCell, Cell, Contract, contractAddress, ContractProvider, Sender, SendMode } from 'ton-core';
 
-export type NFTItemConfig = {};
+export type NFTItemConfig = {
+    owner: Address;
+    content: Cell;
+};
 
-export function nFTItemConfigToCell(config: NFTItemConfig): Cell {
-    return beginCell().endCell();
+export function NFTItemConfigToCell(config: NFTItemConfig): Cell {
+    return beginCell().storeAddress(config.owner).storeRef(config.content).endCell();
 }
 
 export class NFTItem implements Contract {
@@ -14,7 +17,7 @@ export class NFTItem implements Contract {
     }
 
     static createFromConfig(config: NFTItemConfig, code: Cell, workchain = 0) {
-        const data = nFTItemConfigToCell(config);
+        const data = NFTItemConfigToCell(config);
         const init = { code, data };
         return new NFTItem(contractAddress(workchain, init), init);
     }
