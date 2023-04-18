@@ -3,10 +3,11 @@ import { Address, beginCell, Cell, Contract, contractAddress, ContractProvider, 
 export type NFTItemConfig = {
     owner: Address;
     index: bigint;
+    content: Cell;
 };
 
 export function NFTItemConfigToCell(config: NFTItemConfig): Cell {
-    return beginCell().storeAddress(config.owner).storeUint(config.index, 16).endCell();
+    return beginCell().storeAddress(config.owner).storeUint(config.index, 16).storeRef(config.content).endCell();
 }
 
 export class NFTItem implements Contract {
@@ -28,5 +29,17 @@ export class NFTItem implements Contract {
             sendMode: SendMode.PAY_GAS_SEPARATELY,
             body: beginCell().endCell(),
         });
+    }
+
+    async getOwner(provider: ContractProvider): Promise<Address> {
+        const result = (await provider.get('get_nft_data', [])).stack;
+        result.skip(3);
+        return result.readAddress();
+    }
+
+    async getMetadata(provider: ContractProvider): Promise<Cell> {
+        const result = (await provider.get('get_nft_data', [])).stack;
+        result.skip(4);
+        return result.readCell();
     }
 }
