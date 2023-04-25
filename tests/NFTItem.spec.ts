@@ -3,7 +3,6 @@ import { Address, Cell, beginCell, toNano } from 'ton-core';
 import { NFTItem } from '../wrappers/NFTItem';
 import '@ton-community/test-utils';
 import { randomAddress } from '@ton-community/test-utils';
-import { compile } from '@ton-community/blueprint';
 
 describe('NFTItem', () => {
     let code: Cell;
@@ -11,22 +10,15 @@ describe('NFTItem', () => {
     let nft: SandboxContract<NFTItem>;
     let ownerAddress: Address;
 
-    beforeAll(async () => {
-        code = await compile('NFTItem');
-    });
-
     beforeEach(async () => {
         ownerAddress = randomAddress();
         blockchain = await Blockchain.create();
         nft = blockchain.openContract(
-            NFTItem.createFromConfig(
-                {
-                    owner: ownerAddress,
-                    index: 0n,
-                    content: beginCell().storeUint(1, 8).storeStringTail('https://test.com/1.json').endCell(),
-                },
-                code
-            )
+            NFTItem.createFromConfig({
+                owner: ownerAddress,
+                index: 0n,
+                content: beginCell().storeUint(1, 8).storeStringTail('https://test.com/1.json').endCell(),
+            })
         );
     });
 

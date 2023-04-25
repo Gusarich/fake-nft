@@ -2,7 +2,7 @@
 
 <{
     <b <b b> ref, 2907562126 32 u, <{
-        DROP
+        102351 PUSHINT EQUAL 11 THROWIFNOT
         c4 PUSH
         CTOS
         -1 PUSHINT

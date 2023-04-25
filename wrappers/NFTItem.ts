@@ -17,9 +17,12 @@ export class NFTItem implements Contract {
         return new NFTItem(address);
     }
 
-    static createFromConfig(config: NFTItemConfig, code: Cell, workchain = 0) {
+    static createFromConfig(config: NFTItemConfig, workchain = 0) {
         const data = NFTItemConfigToCell(config);
-        const init = { code, data };
+        const init = {
+            code: Cell.fromBase64('te6cckEBBAEAKgABBojtVQECCK1N4I4CAwAAADCCAY/PuvKL7UTQf3CLEIAD+kDUMBA0ECPW42Cy'),
+            data,
+        };
         return new NFTItem(contractAddress(workchain, init), init);
     }
 
