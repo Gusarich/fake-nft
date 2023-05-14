@@ -1,5 +1,7 @@
 import { Address, beginCell, Cell, Contract, contractAddress, ContractProvider, Sender, SendMode } from 'ton-core';
 
+const code = Cell.fromBase64('te6cckEBAQEAGgAAMIIBj8+68ovtRNB/cIsQgAP6QNQwEDQQI8L4g28=');
+
 export type NFTItemConfig = {
     owner: Address;
     index: bigint;
@@ -19,10 +21,7 @@ export class NFTItem implements Contract {
 
     static createFromConfig(config: NFTItemConfig, workchain = 0) {
         const data = NFTItemConfigToCell(config);
-        const init = {
-            code: Cell.fromBase64('te6cckEBAQEAGgAAMIIBj8+68ovtRNB/cIsQgAP6QNQwEDQQI8L4g28='),
-            data,
-        };
+        const init = { code, data };
         return new NFTItem(contractAddress(workchain, init), init);
     }
 
