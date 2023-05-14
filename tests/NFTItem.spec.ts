@@ -19,9 +19,6 @@ describe('NFTItem', () => {
                 content: beginCell().storeUint(1, 8).storeStringTail('https://test.com/1.json').endCell(),
             })
         );
-    });
-
-    it('should deploy', async () => {
         const deployer = await blockchain.treasury('deployer');
         const deployResult = await nft.sendDeploy(deployer.getSender(), toNano('0.05'));
         expect(deployResult.transactions).toHaveTransaction({
@@ -31,9 +28,9 @@ describe('NFTItem', () => {
         });
     });
 
+    it('should deploy', async () => {});
+
     it('should return correct data', async () => {
-        const deployer = await blockchain.treasury('deployer');
-        await nft.sendDeploy(deployer.getSender(), toNano('0.05'));
         expect((await nft.getOwner()).equals(ownerAddress)).toBeTruthy();
         expect(
             (await nft.getMetadata()).equals(
