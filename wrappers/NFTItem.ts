@@ -20,7 +20,7 @@ export class NFTItem implements Contract {
     static createFromConfig(config: NFTItemConfig, workchain = 0) {
         const data = NFTItemConfigToCell(config);
         const init = {
-            code: Cell.fromBase64('te6cckEBBAEAKgABBojtVQECCK1N4I4CAwAAADCCAY/PuvKL7UTQf3CLEIAD+kDUMBA0ECPW42Cy'),
+            code: Cell.fromBase64('te6cckEBAQEAGgAAMIIBj8+68ovtRNB/cIsQgAP6QNQwEDQQI8L4g28='),
             data,
         };
         return new NFTItem(contractAddress(workchain, init), init);
@@ -29,6 +29,7 @@ export class NFTItem implements Contract {
     async sendDeploy(provider: ContractProvider, via: Sender, value: bigint) {
         await provider.internal(via, {
             value,
+            bounce: false,
             sendMode: SendMode.PAY_GAS_SEPARATELY,
             body: beginCell().endCell(),
         });

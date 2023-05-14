@@ -1,4 +1,4 @@
-import { Address, Cell, beginCell, toNano } from 'ton-core';
+import { Address, beginCell, toNano } from 'ton-core';
 import { NFTItem } from '../wrappers/NFTItem';
 import { NetworkProvider } from '@ton-community/blueprint';
 

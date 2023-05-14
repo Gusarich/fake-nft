@@ -1,11 +1,10 @@
 import { Blockchain, SandboxContract } from '@ton-community/sandbox';
-import { Address, Cell, beginCell, toNano } from 'ton-core';
+import { Address, beginCell, toNano } from 'ton-core';
 import { NFTItem } from '../wrappers/NFTItem';
 import '@ton-community/test-utils';
 import { randomAddress } from '@ton-community/test-utils';
 
 describe('NFTItem', () => {
-    let code: Cell;
     let blockchain: Blockchain;
     let nft: SandboxContract<NFTItem>;
     let ownerAddress: Address;
@@ -29,7 +28,6 @@ describe('NFTItem', () => {
             from: deployer.address,
             to: nft.address,
             deploy: true,
-            success: true,
         });
     });
 
