@@ -2,17 +2,14 @@
 
 <{
     102351 PUSHINT EQUAL 11 THROWIFNOT
-    c4 PUSH
-    CTOS
     -1 PUSHINT
     0 PUSHINT
     x{0} PUSHSLICE
-    s0 s3 XCHG
+    c4 PUSH
+    CTOS
     LDMSGADDR
     LDREF
     DROP
-    s3 s4 XCHG
-    s2 s3 XCHG
 }>c
 
 2 boc+>B B>base64 type cr

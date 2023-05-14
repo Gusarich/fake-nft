@@ -1,6 +1,6 @@
 import { Address, beginCell, Cell, Contract, contractAddress, ContractProvider, Sender, SendMode } from 'ton-core';
 
-const code = Cell.fromBase64('te6cckEBAQEAGgAAMIIBj8+68ovtRNB/cIsQgAP6QNQwEDQQI8L4g28=');
+const code = Cell.fromBase64('te6cckEBAQEAFQAAJoIBj8+68ot/cIsQgO1E0PpA1DBDxHRs');
 
 export type NFTItemConfig = {
     owner: Address;
