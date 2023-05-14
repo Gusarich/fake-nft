@@ -31,11 +31,9 @@ describe('NFTItem', () => {
     it('should deploy', async () => {});
 
     it('should return correct data', async () => {
-        expect((await nft.getOwner()).equals(ownerAddress)).toBeTruthy();
-        expect(
-            (await nft.getMetadata()).equals(
-                beginCell().storeUint(1, 8).storeStringTail('https://test.com/1.json').endCell()
-            )
-        ).toBeTruthy();
+        expect(await nft.getOwner()).toEqualAddress(ownerAddress);
+        expect(await nft.getMetadata()).toEqualCell(
+            beginCell().storeUint(1, 8).storeStringTail('https://test.com/1.json').endCell()
+        );
     });
 });
