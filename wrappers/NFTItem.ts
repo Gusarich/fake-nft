@@ -3,13 +3,17 @@ import { Address, beginCell, Cell, Contract, contractAddress, ContractProvider, 
 const code = Cell.fromBase64('te6cckEBAQEAFQAAJoIBj8+68ot/cIsQgO1E0PpA1DBDxHRs');
 
 export type NFTItemConfig = {
-    owner: Address;
-    index: bigint;
+    owner?: Address;
+    index?: bigint;
     content: Cell;
 };
 
 export function NFTItemConfigToCell(config: NFTItemConfig): Cell {
-    return beginCell().storeAddress(config.owner).storeUint(config.index, 16).storeRef(config.content).endCell();
+    return beginCell()
+        .storeAddress(config.owner)
+        .storeUint(config.index || 0, 16)
+        .storeRef(config.content)
+        .endCell();
 }
 
 export class NFTItem implements Contract {
