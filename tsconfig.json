@@ -9,5 +9,5 @@
         "strict": true,
         "skipLibCheck": true
     },
-    "files": ["wrappers/NFTItem.ts"]
+    "files": ["index.ts"]
 }
